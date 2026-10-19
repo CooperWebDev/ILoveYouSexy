@@ -90,13 +90,13 @@ const CONFIG = {
 
   // The "game credits" that roll at the very end
   credits: [
-    ["Starring", "Ella"],
-    ["Player 2", "Cooper"],
-    ["Written & coded by", "Cooper (with a lot of love)"],
+    ["Starring", "Elia (the sweetest girl alive)"],
+    ["Player 2", "Milan (trying to keep up with my beautiful girl)"],
+    ["Written & coded by", "Milan (that used every bit of his heart)"],
     ["Cutest supporting cast", "Bunnies 🐰  Horses 🐴  Dogs 🐶"],
     ["Set design", "Pink everything & orchids 🌸"],
-    ["Soundtrack", "Ella on piano 🎹 & Stray Kids 🎤"],
-    ["Special thanks", "April 4, 2026 — the best day ever"],
+    ["Soundtrack", "Elia on the piano (such a beautiful and talanted girl)"],
+    ["Special thanks", "April 4, 2026.. the best day ever.."],
   ],
 
   // =====================================================================
@@ -112,7 +112,7 @@ const CONFIG = {
     for: "For {her} 💗",
     someone_made_something_just: "For my beautiful girl… 💌",
     unlock: "Unlock",
-    open_your_surprise: "Open your surprise :D 🎀",
+    open_your_surprise: "Open your surprise :D",
     every_second_counts: "Every second counts..",
     days: "days",
     hours: "hours",
@@ -158,7 +158,7 @@ const CONFIG = {
     very_scientific: "very scientific",
     how_much_do_i: "How much do I love you?",
     let_s_measure_it: "let's measure it…",
-    measure_it: "measure it 📏",
+    measure_it: "Measure it :D",
     use_your_voice: "use your voice",
     say_it_out_loud: "Say it out loud",
     tap_the_mic_and: "Tap the mic and say \"I love you\". The heart fills up with your voice. Nothing is recorded.",
