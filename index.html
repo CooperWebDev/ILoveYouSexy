@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffd3e6">
+<title data-t="for"></title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&family=Press+Start+2P&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ella 💗" data-t-content="appTitle">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/features.css">
+<link rel="stylesheet" href="css/more.css">
+</head>
+<body class="locked">
+
+<canvas id="bg"></canvas>
+<canvas id="fw"></canvas>
+<div id="progress"><i></i></div>
+<div id="cRing"></div><div id="cDot"></div>
+<div id="flash"></div>
+
+<!-- reusable orchid drawing -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="petalG" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#fff0fa"/><stop offset="1" stop-color="#f6b8e4"/>
+    </radialGradient>
+    <linearGradient id="lipG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6fae"/><stop offset="1" stop-color="#b8327a"/>
+    </linearGradient>
+    <symbol id="orchidSym" viewBox="-50 -50 100 100">
+      <g fill="url(#petalG)" stroke="#e9a2d4" stroke-width="1.2">
+        <ellipse cx="0" cy="-25" rx="9" ry="22"/>
+        <ellipse cx="0" cy="-25" rx="9" ry="22" transform="rotate(125)"/>
+        <ellipse cx="0" cy="-25" rx="9" ry="22" transform="rotate(235)"/>
+        <ellipse cx="-21" cy="-5" rx="20" ry="15" transform="rotate(-22 -21 -5)"/>
+        <ellipse cx="21" cy="-5" rx="20" ry="15" transform="rotate(22 21 -5)"/>
+      </g>
+      <g stroke="#e9a2d4" stroke-width=".8" fill="none" opacity=".7">
+        <path d="M-6 -6 Q-22 -10 -34 -4"/><path d="M6 -6 Q22 -10 34 -4"/>
+      </g>
+      <path d="M-11 4 Q-14 24 0 28 Q14 24 11 4 Q0 12 -11 4Z" fill="url(#lipG)"/>
+      <circle cx="0" cy="1" r="5.5" fill="#fff6b8" stroke="#f2c94c" stroke-width="1"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ LOADER ============ -->
+<section id="loader" class="screen" aria-label="Loading" data-t-aria-label="loading">
+  <div class="ld-inner">
+    <svg class="ld-heart" id="ldHeart" viewBox="0 0 200 180" aria-hidden="true">
+      <defs>
+        <linearGradient id="ldG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffa3c6"/><stop offset=".6" stop-color="#f0528f"/><stop offset="1" stop-color="#c56bd6"/>
+        </linearGradient>
+      </defs>
+      <path id="ldPath" d="M100 168 C 40 128, 8 98, 12 60 C 16 22, 66 12, 100 52 C 134 12, 184 22, 188 60 C 192 98, 160 128, 100 168 Z"
+            fill="url(#ldG)" stroke="#f0528f" stroke-width="5" stroke-linejoin="round"/>
+    </svg>
+    <p class="ld-text" id="ldText"></p>
+    <div class="ld-bar"><i></i></div>
+  </div>
+</section>
+
+<!-- ============ LOCK SCREEN ============ -->
+<section id="lock" class="screen waiting" aria-label="Locked" data-t-aria-label="locked">
+  <div id="lockTilt">
+    <div class="lock-card" id="lockCard">
+      <span class="lock-deco" style="--i:0;left:-14px;top:-18px">🐰</span>
+      <span class="lock-deco" style="--i:1;right:-10px;top:24px">🌸</span>
+      <span class="lock-deco" style="--i:2;left:-18px;bottom:40px">🐶</span>
+      <span class="lock-deco" style="--i:3;right:-16px;bottom:-14px">🐴</span>
+      <div class="lock-wrap">
+        <svg class="lock-svg" id="lockSvg" viewBox="0 0 120 130" aria-hidden="true">
+          <defs>
+            <linearGradient id="lockG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffa3c6"/><stop offset="1" stop-color="#f0528f"/>
+            </linearGradient>
+          </defs>
+          <path class="shackle" d="M38 62 V40 a22 22 0 0 1 44 0 V62" fill="none" stroke="#e0457f" stroke-width="10" stroke-linecap="round"/>
+          <path d="M60 124 C 18 98, 6 78, 13 61 C 20 45, 45 43, 60 61 C 75 43, 100 45, 107 61 C 114 78, 102 98, 60 124 Z" fill="url(#lockG)"/>
+          <path d="M38 66 C 34 60, 26 60, 23 66" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".6"/>
+          <circle cx="60" cy="80" r="7.5" fill="#fff"/>
+          <path d="M56.5 84 h7 l2.2 14 h-11.4z" fill="#fff"/>
+        </svg>
+        <div class="orbit" aria-hidden="true"><span>✦</span><span>✦</span><span>✦</span></div>
+      </div>
+      <h1 id="lockTitle"></h1>
+      <p class="sub" data-t="someone_made_something_just"></p>
+      <form id="lockForm" autocomplete="off">
+        <div class="pw-row">
+          <input id="pw" type="password" placeholder="enter the secret code 🔐" aria-label="Password" autocomplete="off" data-t-aria-label="password" data-t-placeholder="enter_the_secret_code">
+          <button type="submit" data-t="unlock"></button>
+        </div>
+      </form>
+      <p class="hint" id="hint"></p>
+      <p class="err" id="err" role="alert"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="screen waiting" aria-label="Intro" data-t-aria-label="intro">
+  <canvas id="morph"></canvas>
+  <p class="cap" id="cap"></p>
+  <div class="intro-ui">
+    <p class="since" id="since"></p>
+    <button class="btn" id="enterBtn" data-t="open_your_surprise"></button>
+  </div>
+</section>
+
+<!-- ============ MAIN ============ -->
+<main id="main" aria-hidden="true">
+
+  <header class="hero" id="hero">
+    <div class="par" data-d=".35" style="left:4%;top:9%"><div class="pop-in" style="--d:1.2s"><svg class="orchid" style="--s:120px;--r:-18deg"><use href="#orchidSym"/></svg></div></div>
+    <div class="par" data-d=".6" style="right:7%;top:14%"><div class="pop-in" style="--d:1.4s"><svg class="orchid" style="--s:84px;--r:20deg;animation-delay:-2s"><use href="#orchidSym"/></svg></div></div>
+    <div class="par" data-d=".8" style="left:12%;bottom:16%"><div class="pop-in" style="--d:1.6s"><svg class="orchid" style="--s:70px;--r:10deg;animation-delay:-4s"><use href="#orchidSym"/></svg></div></div>
+    <div class="par" data-d=".45" style="right:5%;bottom:12%"><div class="pop-in" style="--d:1.8s"><svg class="orchid" style="--s:110px;--r:-12deg;animation-delay:-1s"><use href="#orchidSym"/></svg></div></div>
+    <div id="sparks" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="made" id="madeBy"></p>
+      <h1 class="name" id="heroName"></h1>
+      <p class="together"><span data-t="togetherPre"></span><b id="heroDate"></b><span data-t="togetherPost"></span></p>
+    </div>
+    <div class="scroll-cue"><i data-t="scrollCue" style="font-style:normal"></i><span>⌄</span></div>
+  </header>
+
+  <!-- counter -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" id="countKicker"></span>
+      <h2 data-t="every_second_counts"></h2>
+    </div>
+    <div class="counter" id="counter">
+      <div class="count-box reveal" data-a="pop"><div class="num" id="cD">0</div><div class="lbl" data-t="days"></div></div>
+      <div class="count-box reveal" data-a="pop" style="transition-delay:.1s"><div class="num" id="cH">0</div><div class="lbl" data-t="hours"></div></div>
+      <div class="count-box reveal" data-a="pop" style="transition-delay:.2s"><div class="num" id="cM">0</div><div class="lbl" data-t="minutes"></div></div>
+      <div class="count-box reveal" data-a="pop" style="transition-delay:.3s"><div class="num" id="cS">0</div><div class="lbl" data-t="seconds"></div></div>
+    </div>
+    <p class="count-note reveal" data-a="blur" data-t="and_every_single_one"></p>
+    <div class="crew reveal" data-a="pop" id="crew"><span>🐰</span><span>🐴</span><span>🐶</span><span>🌸</span></div>
+    <p class="crew-cap reveal" data-t="the_whole_crew_says"></p>
+  </section>
+
+  <!-- our story timeline -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="our_story_so_far"></span>
+      <h2 data-t="every_day_with_you"></h2>
+      <p class="lead" data-t="scroll_and_watch_our"></p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- 3D heart -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="drag_it___spin"></span>
+      <h2 data-t="my_heart_is_yours"></h2>
+      <p class="lead" data-t="made_of_thousands_of"></p>
+    </div>
+    <div class="heart3d-wrap reveal" data-a="zoom">
+      <div class="heart3d-glow"></div>
+      <canvas id="heart3d" aria-label="A spinning 3D heart" data-t-aria-label="a_spinning_3d_heart"></canvas>
+    </div>
+  </section>
+
+  <!-- I love you in 20 languages -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="20_languages___tap"></span>
+      <h2 data-t="i_love_you__in"></h2>
+    </div>
+    <div class="sphere reveal" data-a="zoom" id="sphere" aria-label="I love you in 20 languages" data-t-aria-label="i_love_you_in"></div>
+    <div class="lang-pick reveal">
+      <div class="lp-card" id="lpCard">
+        <div class="lp-lang" id="lpLang"></div>
+        <div class="lp-word" id="lpWord"></div>
+        <div class="lp-say" id="lpSay"></div>
+        <button class="lp-btn" id="lpSpeak" type="button" data-t="hear_it"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- flip cards -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="tap_a_card_to"></span>
+      <h2 data-t="little_letters_for_you"></h2>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- scratch coupons -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="scratch_with_your_finger"></span>
+      <h2 data-t="love_coupons"></h2>
+      <p class="lead" data-t="scratch_the_pink_foil"></p>
+    </div>
+    <div class="coupons" id="coupons"></div>
+  </section>
+
+  <!-- traits -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="a_few_reasons"></span>
+      <h2 data-t="why_you_re_my_favorite"></h2>
+    </div>
+    <div class="traits" id="traits"></div>
+  </section>
+
+  <!-- bouquet -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="for_you"></span>
+      <h2 data-t="orchids_that_never_wilt"></h2>
+      <p class="lead" data-t="your_favorite_flowers"></p>
+    </div>
+    <div class="bouquet reveal" id="bouquet">
+      <svg viewBox="0 0 400 380" aria-label="A bouquet of orchids" data-t-aria-label="a_bouquet_of_orchids">
+        <defs>
+          <linearGradient id="stemG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd19e"/><stop offset="1" stop-color="#4f9e68"/></linearGradient>
+          <linearGradient id="wrapG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd1e3"/><stop offset="1" stop-color="#ff9cc2"/></linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round">
+          <path class="stem" pathLength="1" style="--d:.1s" d="M200 330 C 196 260, 150 200, 110 120"/>
+          <path class="stem" pathLength="1" style="--d:.25s" d="M200 330 C 200 250, 196 160, 200 70"/>
+          <path class="stem" pathLength="1" style="--d:.4s" d="M200 330 C 206 260, 250 200, 292 118"/>
+          <path class="stem" pathLength="1" style="--d:.55s" d="M200 330 C 190 270, 120 240, 64 196"/>
+          <path class="stem" pathLength="1" style="--d:.7s" d="M200 330 C 212 272, 282 242, 338 198"/>
+        </g>
+        <g fill="#7cc48f">
+          <path class="leaf" style="--d:1s;transform-origin:196px 270px" d="M196 270 C 160 250, 140 262, 128 280 C 156 286, 178 282, 196 270Z"/>
+          <path class="leaf" style="--d:1.15s;transform-origin:204px 262px" d="M204 262 C 240 240, 262 250, 274 268 C 248 276, 224 274, 204 262Z"/>
+          <path class="leaf" style="--d:1.3s;transform-origin:200px 220px" d="M200 220 C 176 196, 168 176, 176 156 C 194 172, 204 196, 200 220Z"/>
+        </g>
+        <g transform="translate(110 112)"><g class="bloom" style="--d:1.4s"><use href="#orchidSym" x="-38" y="-38" width="76" height="76"/></g></g>
+        <g transform="translate(200 62)"><g class="bloom" style="--d:1.6s"><use href="#orchidSym" x="-44" y="-44" width="88" height="88"/></g></g>
+        <g transform="translate(292 110)"><g class="bloom" style="--d:1.8s"><use href="#orchidSym" x="-38" y="-38" width="76" height="76"/></g></g>
+        <g transform="translate(64 190)"><g class="bloom" style="--d:2s"><use href="#orchidSym" x="-32" y="-32" width="64" height="64"/></g></g>
+        <g transform="translate(338 192)"><g class="bloom" style="--d:2.2s"><use href="#orchidSym" x="-32" y="-32" width="64" height="64"/></g></g>
+        <g class="wrap">
+          <path d="M150 300 L250 300 L226 376 L174 376 Z" fill="url(#wrapG)" stroke="#ff86b2" stroke-width="2"/>
+          <path d="M200 318 C 176 300, 160 312, 172 326 C 182 334, 196 326, 200 318 C 204 326, 218 334, 228 326 C 240 312, 224 300, 200 318Z" fill="#f0528f"/>
+          <circle cx="200" cy="320" r="6" fill="#d63a78"/>
+          <path d="M196 324 L184 350 M204 324 L216 350" stroke="#f0528f" stroke-width="4" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- piano -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="for_my_pianist"></span>
+      <h2 data-t="play_me_something"></h2>
+      <p class="lead" data-t="tap_the_keys__or"></p>
+    </div>
+    <div class="piano reveal" data-a="zoom" id="piano">
+      <div class="piano-top">
+        <span class="brand" id="pianoBrand"></span>
+        <button id="melodyBtn" type="button" data-t="play_a_little"></button>
+      </div>
+      <canvas class="viz" id="viz"></canvas>
+      <div class="keys" id="keys"></div>
+    </div>
+    <p class="piano-tip reveal" data-t="keyboard__a_s_d"></p>
+  </section>
+
+  <!-- love meter -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="very_scientific"></span>
+      <h2 data-t="how_much_do_i"></h2>
+    </div>
+    <div class="meter-box reveal" data-a="pop" id="meterBox">
+      <div class="meter-num" id="meterNum" data-text="0%">0%</div>
+      <div class="meter"><i id="meterFill"></i></div>
+      <p class="meter-cap" id="meterCap" data-t="let_s_measure_it"></p>
+      <button class="btn" id="meterBtn" type="button" data-t="measure_it"></button>
+    </div>
+  </section>
+
+  <!-- photos (only shows if Cooper adds some in config.js) -->
+  <section class="section" id="photoSec" hidden>
+    <div class="head reveal">
+      <span class="kicker" data-t="drag_them_around"></span>
+      <h2 data-t="little_moments"></h2>
+    </div>
+    <div class="polaroids" id="polaroids"></div>
+  </section>
+
+  <!-- question -->
+  <section class="section">
+    <div class="q-box reveal" data-a="pop" id="qBox">
+      <h3 id="qText"></h3>
+      <div class="q-btns">
+        <button class="btn" id="yesBtn" type="button" data-t="yes"></button>
+        <button class="btn soft" id="noBtn" type="button" data-t="no"></button>
+      </div>
+      <p class="yay" id="yay"></p>
+      <button class="btn credits-btn" id="creditsBtn" type="button" data-t="roll_the_credits"></button>
+    </div>
+  </section>
+
+  <!-- letter -->
+  <section class="section">
+    <div class="head reveal">
+      <span class="kicker" data-t="one_more_thing"></span>
+      <h2 data-t="a_letter__just_for"></h2>
+    </div>
+    <div class="env-wrap reveal" data-a="zoom">
+      <button class="envelope" id="envelope" type="button" aria-label="Open the letter" data-t-aria-label="open_the_letter">
+        <span class="body"></span>
+        <span class="paper" id="envPaper"></span>
+        <span class="pocket"></span>
+        <span class="flap"></span>
+        <span class="seal">♥</span>
+      </button>
+      <p class="env-cap" id="envCap" data-t="tap_to_open"></p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="big" id="footBig"></span>
+    <span id="footLine"></span>
+  </footer>
+</main>
+
+<!-- music button -->
+<button id="musicBtn" type="button" aria-label="Music on/off" data-t-aria-label="music_on_off">
+  <span class="disc">♪</span>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
+
+<!-- night mode button -->
+<button id="nightBtn" type="button" aria-label="Night mode on/off" data-t-aria-label="night_mode_on_off"><span class="moon">🌙</span><span class="sun">☀️</span></button>
+
+<!-- letter popup -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="letter" role="dialog" aria-label="Letter" data-t-aria-label="letter">
+    <button class="x" id="closeLetter" type="button" aria-label="Close" data-t-aria-label="close">✕</button>
+    <div id="letterBody"></div>
+  </div>
+</div>
+
+<!-- end credits -->
+<div id="credits" aria-hidden="true">
+  <div class="stars" id="creditStars"></div>
+  <div class="credits-roll" id="creditsRoll"></div>
+  <button class="x" id="closeCredits" type="button" aria-label="Close" data-t-aria-label="close">✕</button>
+</div>
+
+<!-- achievement toast -->
+<div class="toast" id="toast" role="status">
+  <div class="trophy">🏆</div>
+  <div><small data-t="achievement_unlocked"></small><b id="toastTitle"></b></div>
+</div>
+
+<script src="config.js"></script>
+<script src="js/texts.js"></script>
+<script src="js/app.js"></script>
+<script src="js/shader.js"></script>
+<script src="js/heart3d.js"></script>
+<script src="js/music.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/more.js"></script>
+</body>
+</html>
