@@ -115,7 +115,7 @@
   #lock.on .hint{animation:fadeUp .8s ease 1.6s forwards}
   .pw-row{display:flex;gap:8px;background:#fff;border-radius:999px;padding:6px;box-shadow:0 6px 20px -8px rgba(214,58,120,.35);border:1.5px solid var(--pink-200);transition:box-shadow .3s,border-color .3s}
   .pw-row:focus-within{border-color:var(--pink-400);box-shadow:0 0 0 5px rgba(255,122,172,.22),0 0 30px rgba(255,122,172,.35)}
-  .pw-row input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:10px 14px;font:600 16px var(--sans);color:var(--ink);letter-spacing:.12em}
+  .pw-row input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:10px 14px;font:600 16px var(--sans);color:var(--ink);letter-spacing:.12em;width:100%;}
   .pw-row input::placeholder{color:#d48aac;letter-spacing:0;font-weight:500}
   .pw-row button{border:0;border-radius:999px;padding:10px 20px;font-weight:700;color:#fff;position:relative;overflow:hidden;
     background:linear-gradient(135deg,var(--pink-400),var(--pink-600));box-shadow:0 6px 14px -4px rgba(214,58,120,.6);transition:transform .2s}
@@ -203,7 +203,7 @@
   .par .pop-in{opacity:0;transform:scale(0) rotate(-120deg)}
   main.show .par .pop-in{animation:decoIn 1s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:var(--d,1s)}
   .spark{position:absolute;color:#fff;pointer-events:none;text-shadow:0 0 10px #ff9cc2;animation:twinkle var(--t,3s) ease-in-out infinite;animation-delay:var(--d,0s)}
-  .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:.15em;
+  .scroll-cue{position:absolute;bottom:26px;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:.15em;
     text-transform:uppercase;color:var(--pink-500);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;z-index:2}
   main.show .scroll-cue{animation:fadeUp 1s ease 2.6s forwards}
   .scroll-cue span{font-size:22px;animation:bounce 1.6s ease-in-out infinite}
