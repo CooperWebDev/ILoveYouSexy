@@ -107,7 +107,7 @@ const CONFIG = {
   texts: {
     appTitle: "{her} 💗",
     togetherPre: "together since ",
-    togetherPost: " 🌸",
+    togetherPost: " ",
     scrollCue: "scroll",
     for: "For {her} 💗",
     someone_made_something_just: "For my beautiful girl… 💌",
@@ -123,7 +123,7 @@ const CONFIG = {
     our_story_so_far: "our story so far",
     every_day_with_you: "Every day with you",
     scroll_and_watch_our: "Scroll and watch our story, not the entire story don't worry because there are so many memories to come hehe :>",
-    drag_it___spin: " ",
+    drag_it___spin: "My heart",
     my_heart_is_yours: "My heart is yours",
     made_of_thousands_of: "Be gentle with it sexy.. but i know you will don't worry :)",
     "20_languages___tap": "20 languages · tap one to hear it",
