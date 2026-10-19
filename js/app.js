@@ -470,17 +470,18 @@ const Morph = (() => {
   function to(s) {
     shape = s; mode = "form";
     const pts = sample(s);
-    parts.forEach((p, i) => { const q = pts[i % pts.length]; p.tx = q[0]; p.ty = q[1]; });
+    const slow = s === "heart" ? 0.28 : 1; /* heart forms slowly, later shapes at normal speed */
+    parts.forEach((p, i) => { const q = pts[i % pts.length]; p.tx = q[0]; p.ty = q[1]; p.k = p.k0 * slow; });
   }
   function start(ox, oy) {
     resize();
     parts = [];
     for (let i = 0; i < MAX; i++) {
-      const a = Math.random() * 6.28, v = rand(2, 22);
+      const a = Math.random() * 6.28, v = rand(1, 8);
       const white = Math.random() < 0.08;
       parts.push({
         x: ox, y: oy, vx: Math.cos(a) * v, vy: Math.sin(a) * v, tx: ox, ty: oy,
-        k: rand(0.018, 0.05), r: white ? rand(1.4, 2.6) : rand(1.2, 2.5), ci: white ? 6 : Math.floor(Math.random() * 6),
+        k: 0, k0: rand(0.018, 0.05), r: white ? rand(1.4, 2.6) : rand(1.2, 2.5), ci: white ? 6 : Math.floor(Math.random() * 6),
         ph: Math.random() * 6.28, a: 1,
       });
     }
@@ -534,13 +535,13 @@ const Morph = (() => {
   return { start, to, explode };
 })();
 
-async function setCap(text) {
+async function setCap(text, speed = 55) {
   const cap = $("#cap");
   cap.classList.add("out");
   await sleep(350);
   cap.textContent = "";
   cap.classList.remove("out");
-  await typeText(cap, text, 55);
+  await typeText(cap, text, speed);
 }
 
 async function runIntro(ox, oy) {
@@ -550,11 +551,11 @@ async function runIntro(ox, oy) {
   Morph.start(ox, oy);
   Morph.to("heart");
   await sleep(500);
-  setCap(lines[0]);
-  await sleep(3000);
+  setCap(lines[0], 140);
+  await sleep(6500);
   Morph.to({ text: CONFIG.herName, font: `700 SIZEpx "Dancing Script", cursive`, scale: 1.25 });
-  setCap(lines[1]);
-  await sleep(3300);
+  setCap(lines[1], 90);
+  await sleep(5200);
   Morph.to({ text: `${pad(START.getDate())}.${pad(START.getMonth() + 1)}.${START.getFullYear()}`, font: `700 SIZEpx Quicksand, sans-serif`, scale: 0.75 });
   setCap(lines[2]);
   await sleep(2200);
