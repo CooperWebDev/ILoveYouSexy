@@ -279,7 +279,7 @@ const CONFIG = {
     "100_days": "100 days",
     a_big_deal_in: "The time flew by so fast, but it was so much fun :)",
     half_a_year: "Half a year",
-    six_months_with_my: "Six months with my favorite person.",
+    six_months_with_my: "Six months with my favorite person.. im so in love..",
     "200_days": "200 days",
     still_the_cutest__still: "Still the cutest. Still counting.",
     "300_days": "300 days",
