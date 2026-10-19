@@ -201,7 +201,7 @@ const CONFIG = {
     so_close__maybe: "So close 😚",
     you_ve_got_this: "You've got this 🐰",
     come_back: "come back {nick}..",
-    hi: "Hi, {nick}",
+    hi: "Hey, {nick}",
     a_little_something__made: "a little something, made by {me}, for",
     since: "since {0} · {1} · {2}",
     s_piano: "{her}'s piano",
