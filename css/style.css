@@ -15,7 +15,7 @@
   *{box-sizing:border-box}
   html{background:#ffe3ef;scroll-behavior:smooth}
   body{margin:0;font-family:var(--sans);color:var(--ink);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
-  body.locked{overflow:hidden;height:100vh}
+  body.locked{overflow:hidden;height:100vh;height:100dvh}
   body::before{
     content:"";position:fixed;inset:0;z-index:-2;
     background:
@@ -352,4 +352,37 @@
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.2s!important}
+  }
+
+  /* ---------- lock screen: phone fit ---------- */
+  #lock{
+    padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+    height:100vh;height:100dvh;bottom:auto;
+    overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+    place-items:safe center;
+  }
+  #lockTilt{width:min(420px,100%);margin:auto}
+  .lock-card{max-width:100%}
+  .lock-card h1{font-size:clamp(34px,11vw,48px);overflow-wrap:anywhere}
+  .lock-card .sub{overflow-wrap:anywhere}
+  .pw-row input{font-size:16px} /* >=16px stops iOS zooming on focus */
+  @media (max-width:560px){
+    .lock-card{padding:26px 18px 22px;border-radius:26px}
+    .lock-wrap{width:84px;height:90px}
+    .lock-svg{width:84px;height:90px}
+    .lock-card .sub{margin-bottom:16px;font-size:15px}
+    .pw-row button{padding:10px 16px}
+    .hint{margin-top:12px;font-size:13px}
+    .lock-deco{font-size:24px}
+    .lock-deco:nth-of-type(1){left:-4px!important;top:-16px!important}
+    .lock-deco:nth-of-type(2){right:-2px!important;top:18px!important}
+    .lock-deco:nth-of-type(3){left:-4px!important;bottom:36px!important}
+    .lock-deco:nth-of-type(4){right:-2px!important;bottom:-12px!important}
+    @keyframes orbit{from{transform:rotate(0) translateX(58px) rotate(0) scale(.8)}50%{transform:rotate(180deg) translateX(58px) rotate(-180deg) scale(1.2)}to{transform:rotate(360deg) translateX(58px) rotate(-360deg) scale(.8)}}
+  }
+  @media (max-height:600px){
+    .lock-wrap{width:64px;height:70px;margin-bottom:0}
+    .lock-svg{width:64px;height:70px}
+    .lock-card{padding-top:18px;padding-bottom:14px}
+    .lock-card .sub{margin-bottom:10px}
   }
